@@ -17,7 +17,7 @@
             {{Sname}}
         </h1>
         <nav class="navi">
-            <a href="home.html">Home</a>
+            <a href="/">Home</a>
             <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
             <!-- <a href="login.html">LogIn</a> -->
@@ -85,10 +85,9 @@
                 window.rates = JSON.parse(this.responseText);
                 if(JSON.parse(this.responseText)['Error']) {
                     document.getElementById('main-box').textContent = "Error";
-                    console.log('error');
                 }
                 else{
-                    console.log('succes');
+                    console.log('Success');
                 }
             }
         }

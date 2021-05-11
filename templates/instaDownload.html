@@ -8,8 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/basic.css')}}" media="all"/>
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/style.css')}}" media="all"/>
-    <link rel="stylesheet" type="text/css" href="C:\Users\Sameer Borkar\Desktop\Flask_Project\project\static\css\basic.css" media="all"/>
-    <link rel="stylesheet" type="text/css" href="C:\Users\Sameer Borkar\Desktop\Flask_Project\project\static\css\style.css" media="all"/>
     <style>
         .res_row{
             display: flex;
@@ -19,7 +17,6 @@
     <title>Instagram Downloader</title>
 </head>
 
-
 <body>
 
     <header>
@@ -27,7 +24,7 @@
             {{Sname}}
         </h1>
         <nav class="navi">
-            <a href="home.html">Home</a>
+            <a href="/">Home</a>
             <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
             <!-- <a href="login.html">LogIn</a> -->
@@ -103,10 +100,8 @@ function showResult(data){
 
 
     function callServer(){
-        console.log("Ok");
 
         var pLink = document.getElementById("postLink").value ;
-        console.log(pLink);
 
         xhr = new XMLHttpRequest();
 
@@ -123,7 +118,6 @@ function showResult(data){
                 else{
                     //document.getElementById('loading').style.display= 'none';
                     document.getElementById('instaResult').style.display= 'flex';
-                    console.log('succes');
                     showResult(response);
                 }
             }
@@ -132,7 +126,6 @@ function showResult(data){
                 document.getElementById('loading').style.display= 'flex';
                 document.getElementById('loading').textContent = 'LOADING';
                 document.getElementById('instaResult').style.display= 'none';
-                console.log('loadind123');
             }
         }
         xhr.open('POST','instaresult',true);

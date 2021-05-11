@@ -115,7 +115,6 @@
 
     // calling server for results with Ajax
     function callServer(filetype){
-        console.log("Okays");
 
         var vlink = document.getElementById("vlink").value;
 
@@ -130,12 +129,10 @@
                     // document.getElementById('loading').style.display= 'none';
                     document.getElementById('loading').textContent = "Error";
                     // document.getElementById('loading').style.display= 'flex';
-                    console.log('error');
                 }
                 else{
                     document.getElementById('loading').style.display= 'none';
                     document.getElementById('ytResult').style.display= 'flex';
-                    console.log('succes');
                     showResult(resp);
                 }
 
@@ -146,8 +143,6 @@
                 document.getElementById('loading').style.display= 'flex';
                 document.getElementById('loading').textContent = 'LOADING';
                 document.getElementById('ytResult').style.display= 'none';
-
-                console.log('loading123');
             }
         }
 

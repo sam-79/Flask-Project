@@ -7,7 +7,7 @@ from instaloader import Instaloader, Post
 from currencies import allcurrencies
 from database import DataBase
 from decouple import config
-
+import os
 
 Sname = 'Online Tools' #Header name of site
 UPLOAD_FOLDER = '/temp'
@@ -108,7 +108,7 @@ def instadownloaderForm():
 
 # Instagram Result Request
 @app.route('/instaresult', methods=['POST'])
-def instadownloader(login=True, username = config('insta_username',default=''),password=config('insta_password',default='')):
+def instadownloader(login=True, username = config('insta_username',default=os.getenv('insta_username')),password=config('insta_password',default=os.getenv('insta_password'))):
     
     shortcode = (request.data.decode().split(sep='/'))[4]
     #Create instance of Instaloader
@@ -148,7 +148,7 @@ def cc():
 @app.route('/ccresult', methods=['GET'])
 def ccresult():
     try:
-        key = config('currencylayer_key', default='')
+        key = config('currencylayer_key', default=os.getenv('currencylayer_key'))
         data = requests.get(f'http://api.currencylayer.com/live?access_key={key}').json()
         return jsonify(data['quotes'])
     except Exception as exp:
