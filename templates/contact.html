@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/style.css')}}" media="all"/>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/basic.css')}}" media="all"/>
+    <style>
+        @media screen and (min-width:600px){
+            Form>h1{
+                font-size: xxx-large;
+            }
+            Form>div{
+                font-size: x-large;
+            }
+        }
+    </style>
+    <title>Conatct</title>
+</head>
+<body>
+
+    <header>
+        <h1>
+            {{Sname}}
+        </h1>
+        <nav class="navi">
+            <a href="/">Home</a>
+            <a href="about.html">About</a>
+            <!-- <a href="contact.html">Contact</a> -->
+            <!-- <a href="login.html">LogIn</a> -->
+        </nav>
+    </header>
+
+
+    <section class="main-box">
+
+        <form class="contactForm" id="contactForm" method="POST" style="padding: 10px;width: 80%;" >
+            <h1 >Contact Form</h1>
+            <div class="Frow">
+                <label for="">First Name</label>
+                <input type="text" name="Fname" id="Fname">
+            </div>
+
+            <div class="Frow">
+                <label for="">Last Name</label>
+                <input type="text" name="Lname" id="Lname">
+            </div>
+
+            <div class="Frow">
+                <label for="">Email</label>
+                <input type="email" name="email" id="email">
+            </div>
+
+            <div class="Frow">
+                <label for="">Your Query</label>
+                <input type="text" name="query" id="query">
+            </div>
+
+            <div class="Frow">
+                <input type="button" name="submit" id="submit" value="Submit" onclick="callServer();">
+            </div>
+
+        </form>
+
+        <div class="main-box" id="showResDiv" style="display: none;">
+            <h2 id="showRes">
+                
+            </h2>
+        </div>
+
+
+    </section>
+
+    <footer class="foot">
+        <p>
+            Site is under development state.
+        </p>
+    </footer>
+    
+</body>
+
+<script>
+
+    // function getData(){
+    //     var fname = document.getElementById('Fname').value();
+    //     var lname = document.getElementById('Lname').value();
+    //     var email = document.getElementById('email').value();
+    //     var query = document.getElementById('query').value();
+    //     var data= {'Fname':document.getElementById('Fname').value(), 'Lname':document.getElementById('Lname').value(), 'email':document.getElementById('email').value(), 'query':document.getElementById('query').value()};
+
+    // }
+
+
+    function callServer(){
+        console.log("Ok");
+
+        xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                // Response receive successsfully
+                
+                document.getElementById('contactForm').style.display = 'none';
+                document.getElementById('showResDiv').style.display = 'flex';
+                document.getElementById('showRes').textContent = (JSON.parse(this.responseText))['msg'];
+            }
+            if(this.readyState == 1 | this.readyState == 2){
+                //add loading circle
+                document.getElementById('submit').style.backgroundColor = 'red';
+                console.log('loadind123');
+            }
+        }
+        var data= new Array(document.getElementById('Fname').value, document.getElementById('Lname').value, document.getElementById('email').value, document.getElementById('query').value);
+        xhr.open('POST','/contact/thanks',true);
+        
+        xhr.setRequestHeader('Content-type', 'application/json');
+        xhr.send(data);
+    }
+</script>
+
+</html>

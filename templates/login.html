@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/style.css')}}" media="all"/>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/basic.css')}}" media="all"/>
+    
+    <title>LogIn</title>
+</head>
+<body>
+
+    <header>
+        <h1>
+            {{Sname}}
+        </h1>
+        <nav class="navi">
+            <a href="/">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <!-- <a href="login.html">LogIn</a> -->
+        </nav>
+    </header>
+
+    <section class="main-box">
+
+        <form action="#" class="loginForm">
+            <h1>LOG IN</h1>
+            <div class="Frow">
+                <label for="">Username</label>
+                <input type="text" name="" id="">
+            </div>
+
+            <div class="Frow">
+                <label for="">Password</label>
+                <input type="password" name="" id="">
+            </div>
+
+            <div class="Frow">
+                <input type="Submit" name="" id="">
+            </div>
+
+        </form>
+
+    </section>
+
+    <footer class="foot">
+        <p>
+            Site is under development state.
+        </p>
+    </footer>
+    
+</body>
+</html>

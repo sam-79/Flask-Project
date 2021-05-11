@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/style.css')}}" media="all"/>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/basic.css')}}" media="all"/>
+    
+    <title>Youtube Downloader</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>
+            {{Sname}}
+        </h1>
+        <nav class="navi">
+            <a href="/">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <!-- <a href="login.html">LogIn</a> -->
+        </nav>
+    </header>
+
+    <section class="main-box">
+        <div class="Form" id="ytForm">
+            <h1>Youtube Downloader</h1>
+
+            <div class="Frow">
+                <label for="">Enter Youtube Video Link</label>
+                <input type="text" name="vlink" id="vlink">
+            </div>
+
+            <div class="Frow grid">
+                <input type="button" name="submit" id="submit" value="Audio" onclick="callAudio();">
+
+                <input type="button" name="submit" id="submit" value="Video" onclick="callVideo();">
+
+                <input type="button" name="submit" id="submit" value="All Streams" onclick="callAll();">
+            </div>
+
+        </div>
+    </section>
+
+
+    <div id='loading' class="Frow">
+        <!-- LOADING -->
+    </div>
+
+    <div class="title-thumb" style="display: none;">
+
+        <label for="video-title" id="title" style="display: block;"></label>
+        <img src="" alt="Thumbnail" id="thumb" style="display: block;">
+
+    </div>
+
+    <section class="main-box" id="ytResult" style="display: none;">
+        <!-- YT Result -->
+    </section>
+
+    <footer class="foot">
+        <p>
+            Site is under development state.
+        </p>
+    </footer>
+</body>
+
+
+<script>
+    //for displaying results
+    function showResult(data){
+        try{
+            x = document.getElementById("ytResult");
+            while(x.lastElementChild){
+                x.removeChild(x.lastElementChild);
+            }
+        }
+        finally{
+
+        }
+        
+        // //title node
+        // titleNode = document.createElement('p');
+        // titleNode.innerHTML = data.title;
+        // titleNode.setAttribute('id','video_title');
+        // document.getElementById('ytResult').appendChild(titleNode);
+
+        // // // For thumbnail of youtube video but not working
+        // ele = document.createElement('img');
+        // ele.setAttribute("src",data.thumbnail);
+        // ele.setAttribute("width","200");
+        // ele.setAttribute('id','im');
+        // document.getElementById('ytResult').appendChild(ele);
+        document.querySelector('.title-thumb').style.display = 'block';
+        document.querySelector('#title').textContent = data.title;
+        document.querySelector('#thumb').src = data.thumbnail ;
+
+        streams = data.streams
+
+        for (let i in streams){
+
+            var node = document.createElement("div");
+            node.className = 'res_row';
+
+            node.innerHTML = "<p>Extension: "+streams[i][0]+" </p> <p>Quality: "+streams[i][1]+" </p> <p>Filesize: "+streams[i][2]+"MB </p> <a href="+streams[i][3]+">Download</a>";
+
+            document.getElementById("ytResult").appendChild(node);
+        }
+    }
+
+
+    // calling server for results with Ajax
+    function callServer(filetype){
+        console.log("Okays");
+
+        var vlink = document.getElementById("vlink").value;
+
+        xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+
+
+                var resp = JSON.parse(this.responseText);
+                if(resp['Error']) {
+                    // document.getElementById('loading').style.display= 'none';
+                    document.getElementById('loading').textContent = "Error";
+                    // document.getElementById('loading').style.display= 'flex';
+                    console.log('error');
+                }
+                else{
+                    document.getElementById('loading').style.display= 'none';
+                    document.getElementById('ytResult').style.display= 'flex';
+                    console.log('succes');
+                    showResult(resp);
+                }
+
+            }
+
+            if(this.readyState == 1 | this.readyState == 2){
+                //add loading circle
+                document.getElementById('loading').style.display= 'flex';
+                document.getElementById('loading').textContent = 'LOADING';
+                document.getElementById('ytResult').style.display= 'none';
+
+                console.log('loading123');
+            }
+        }
+
+
+        xhr.open('POST','ytresult',true);
+        xhr.setRequestHeader('Content-type', 'application/json');
+        xhr.send([[vlink],[filetype]]);
+    }
+    function callAudio(){
+        callServer("audiostreams");
+    }
+    function callVideo(){
+        callServer("streams");
+    }
+    function callAll(){
+        callServer("allstreams");
+    }
+</script>
+
+
+
+</html>

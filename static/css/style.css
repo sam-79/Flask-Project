@@ -1,0 +1,138 @@
+
+.main-box{
+   
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: 3%;
+   /* background-image:url("https://th.bing.com/th/id/OIP.aF4Y_4FHQnB5oUzifZhGiAHaEK?pid=ImgDet&rs=1");
+   background-repeat: no-repeat;
+   background-size: cover; */
+   background-color: cornsilk;
+   flex-direction: column;
+}
+
+/* .contactForm, .loginForm, .ytForm, .ytResult, .enctpdfForm, .img2pdfForm */
+
+.Form{
+    margin: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    padding: 2%;
+    background-color: rgba(127, 255, 212, 0.452);
+    border-radius: 1vh;
+    
+}
+/* form{
+    margin: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    padding: 2%;
+    background-color: rgba(127, 255, 212, 0.452);
+    border-radius: 1vh;
+} */
+
+.Frow{
+    padding: 1%;
+    border: 5%;
+    display: flex;
+    justify-content: center;
+    height: 5%;
+}
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+
+.Frow>label{
+    color: rgb(130, 84, 0);
+    width: 30%;
+    padding: 10px;
+    border-radius: 5px;
+}
+.Frow>input{
+    width: 65%;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 100%;
+    border: 2px solid rgb(231, 6, 6);
+}
+select, option{
+    width: 65%;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 100%;
+    border: 2px solid rgb(231, 6, 6);
+}
+.Frow>input[type="Submit"]{
+    
+    display: block;
+    width: 30%;
+    align-self: center;
+    background-color: rgb(9, 228, 228);
+    border-radius: 50px;
+    border: 2px solid rgb(5, 78, 114);
+    transition: 0.5s;
+}
+
+.Frow>input[type="Submit"]:hover{
+    background-color: rgb(32, 160, 245);
+    cursor: pointer ;
+}
+
+.Frow>input[type="button"]{
+    
+    display: block;
+    width: 30%;
+    align-self: center;
+    background-color: rgb(9, 228, 228);
+    border-radius: 50px;
+    border: 2px solid rgb(5, 78, 114);
+    transition: 0.5s;
+    margin: 3%;
+    cursor: pointer ;
+    
+}
+
+.Frow>input[type="button"]:hover{
+    background-color: rgb(32, 160, 245);
+    letter-spacing: 1px;
+    font-weight: bold;
+    transition: .5s;
+}
+
+.ytresult{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2%;
+    /* background-image:url("https://th.bing.com/th/id/OIP.aF4Y_4FHQnB5oUzifZhGiAHaEK?pid=ImgDet&rs=1"); */
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.res_row{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr ;
+    text-align: center;
+    width: 100%;
+}
+
+.grid>input[type='button']{
+    width: 100%;
+}
+
+@media screen and (max-width:600px){
+    .grid{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+}
+
+

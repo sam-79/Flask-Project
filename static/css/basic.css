@@ -1,0 +1,50 @@
+*{
+    font-family: 'El Messiri', sans-serif;
+}
+body{
+    margin: 0;
+}
+a{
+    text-decoration: none;
+    transition: 0.5s;
+
+}
+a:hover{
+    color: tomato;
+    transition: 0.5s;
+    
+}
+header {
+    height:20%;
+    background-color: #f11bf1;
+    border: 2px groove rgb(67, 7, 116);
+    
+}
+header>h1{
+    text-align: center;
+    color: #000;
+    font-size: 5vh;
+    
+}
+
+nav{
+    background-color: #ffc6fb;
+    padding: 15px;
+    
+}
+nav>a{
+    padding: 1%;
+    color: rgb(46, 13, 235);
+    font-size: 2vh;
+}
+footer{
+    position: relative;
+    bottom: 20px ;
+    text-align: center;
+    background-color: cyan;
+    padding: 2px;
+    margin-top: 50px ;
+    font-size: 2vh;
+    word-spacing: 3px;
+    letter-spacing: 1px;
+}

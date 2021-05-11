@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/basic.css')}}" media="all"/>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/style.css')}}" media="all"/>
+    <link rel="stylesheet" type="text/css" href="C:\Users\Sameer Borkar\Desktop\Flask_Project\project\static\css\basic.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="C:\Users\Sameer Borkar\Desktop\Flask_Project\project\static\css\style.css" media="all"/>
+    <style>
+        .res_row{
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+    <title>Instagram Downloader</title>
+</head>
+
+
+<body>
+
+    <header>
+        <h1>
+            {{Sname}}
+        </h1>
+        <nav class="navi">
+            <a href="home.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <!-- <a href="login.html">LogIn</a> -->
+        </nav>
+    </header>
+
+    <section class="main-box">
+        <div class="Form" id="instaForm">
+            <h1>Instagram Downloader</h1>
+
+            <div class="Frow">
+                <label for="">Enter Instagram Post Link</label>
+                <input type="text" name="postLink" id="postLink">
+            </div>
+            
+            <div class="Frow">
+                <input type="button" name="submit" id="submit" value="Get Posts" onclick="callServer();">
+            </div>
+
+        </div>
+    </section>
+
+    <div id='loading' class="Frow" style="font-size: xx-large;">
+        <!-- LOADING -->
+    </div>
+
+    <section class="main-box" id="instaResult" style="display: none;">
+        <div class="res_row" id="username"></div>
+        <!-- Instagram Result -->
+    </section>
+
+    
+
+    <footer class="foot">
+        <p>
+            Site is under development state.
+        </p>
+    </footer>
+    
+</body>
+
+
+
+<script>
+
+
+//for displaying results
+function showResult(data){
+        try{
+            x = document.getElementById("instaResult");
+            while(x.lastElementChild){
+                x.removeChild(x.lastElementChild);
+            }
+        }
+        finally{
+
+        }
+        // document.querySelector('.title-thumb').style.display = 'block';
+        //document.querySelector('#username').innerHTML = `<h2>${data.Username}</h2>`;
+        // document.querySelector('#thumb').src = data.thumbnail ;
+        document.getElementById('loading').textContent = `Username: ${data.Username}`;
+        for (let i of data.posts){
+
+            var node = document.createElement("div");
+            node.className = 'res_row';
+
+            node.innerHTML = `<a href=${i}><h3>Download</h3></a>`;
+
+            document.getElementById("instaResult").appendChild(node);
+        }
+    }
+
+
+
+    function callServer(){
+        console.log("Ok");
+
+        var pLink = document.getElementById("postLink").value ;
+        console.log(pLink);
+
+        xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                // Response receive successsfully
+                var response = JSON.parse(this.responseText);
+                if(response['Error']) {
+                    // document.getElementById('loading').style.display= 'none';
+                    document.getElementById('loading').textContent = "Error";
+                    // document.getElementById('loading').style.display= 'flex';
+                    console.log('error');
+                }
+                else{
+                    //document.getElementById('loading').style.display= 'none';
+                    document.getElementById('instaResult').style.display= 'flex';
+                    console.log('succes');
+                    showResult(response);
+                }
+            }
+            if(this.readyState == 1 | this.readyState == 2){
+                //add loading circle
+                document.getElementById('loading').style.display= 'flex';
+                document.getElementById('loading').textContent = 'LOADING';
+                document.getElementById('instaResult').style.display= 'none';
+                console.log('loadind123');
+            }
+        }
+        xhr.open('POST','instaresult',true);
+        xhr.send(pLink);
+    }
+
+</script>
+
+
+</html>

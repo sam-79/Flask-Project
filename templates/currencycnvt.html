@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/basic.css')}}" media="all"/>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/style.css')}}" media="all"/>
+    <title>Currency Converter</title>
+</head>
+<body onload="callServer();">
+
+    <header>
+        <h1>
+            {{Sname}}
+        </h1>
+        <nav class="navi">
+            <a href="home.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <!-- <a href="login.html">LogIn</a> -->
+        </nav>
+    </header>
+    
+    
+    <section class="main-box">
+        <div class="Form">
+            <h1>Currency Converter</h1>
+
+            <div class="Frow">
+                <label for="">Enter Amount</label>
+                <input type="number" name="amount1" id="amount1" oninput="showResult();">
+            </div>
+
+            <div class="Frow">
+                <label for="">From Currency</label>
+                <select id="C1" onchange="showResult();">
+                    {% for i in currency.keys() %}
+                        <option value="{{i}}" >
+                            {{i}} : {{  currency[i] }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="Frow">
+                <label for="">To Currency</label>
+                <select id="C2" onchange="showResult();">
+                    {% for i in currency.keys() %}
+                        <option value="{{i}}" >
+                            {{i}} : {{  currency[i] }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="Frow">
+                <label for="">Result</label>
+                <input type="text" name="result" id="result" >
+            </div>
+        </div>
+    </section> 
+
+    
+
+    <footer class="foot">
+        <p>
+            Site is under development state.
+        </p>
+    </footer>
+    
+</body>
+
+<script>
+    var rates;
+
+    function callServer(){
+        xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                // Response receive successsfully
+                window.rates = JSON.parse(this.responseText);
+                if(JSON.parse(this.responseText)['Error']) {
+                    document.getElementById('main-box').textContent = "Error";
+                    console.log('error');
+                }
+                else{
+                    console.log('succes');
+                }
+            }
+        }
+        xhr.open('GET','ccresult',true);
+        xhr.send();
+    }
+    function showResult(){
+        var src = window.rates['USD'+document.getElementById('C1').value];
+        var to = window.rates['USD'+document.getElementById('C2').value];
+        var amt1 = parseFloat(document.getElementById('amount1').value);
+        var res = (amt1*to)/src;
+        document.getElementById('result').value = parseFloat(res).toFixed(4);
+    }
+
+</script>
+
+</html>

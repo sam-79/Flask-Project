@@ -1,0 +1,15 @@
+
+.main-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(127, 255, 212, 0.452);
+    margin: 2%;
+    padding: 2%;
+}
+
+
+
+ 
+

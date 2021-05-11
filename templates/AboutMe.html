@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/style.css')}}" media="all"/>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/basic.css')}}" media="all"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <title>About Me</title>
+
+    <style>
+        .about{
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            flex-direction: column;
+            background-color: rgb(177, 247, 247);
+            margin: 2vh;
+            /* display: block;
+            padding-top: 5vh;
+            padding-bottom: 5vh;
+            background-color: rgb(177, 247, 247);
+            padding: 2% 0% 2% 0%;
+            width: 80%;
+            position: relative; */
+        }
+        #name{
+            font-size: 5vh;
+        }
+        div{
+            display: flex;
+            justify-content: center;
+            padding: 5px;
+        }
+        .card{
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+        }
+        .social{
+            width: 100%;
+            /* background-color: rgb(193, 211, 243); */
+            padding : 2%;
+            font-size: larger;
+        }
+        @media screen and (max-width:600px){
+            #name{
+                font-size: 3.8vh;
+            }
+            .card{
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 1fr;
+            }
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>
+            {{Sname}}
+        </h1>
+        <nav class="navi">
+            <a href="/">Home</a>
+            <a href="contact.html">Contact</a>
+            <!-- <a href="login.html">LogIn</a> -->
+        </nav>
+    </header>
+
+    <div id="dev" style="margin-bottom: 1vh; background-color: burlywood; font-size: 6vw;">
+        About Developer
+    </div>
+
+    <section class="main-box" style="padding: 0% 15%;">
+        
+        <div id="name"><h1 style="margin-bottom: 0%;">Sameer Borkar</h1></div>
+        <div><h4 style="margin-top: 0%; font-size: 2vh;">Student of G.H. Raisoni Institute Of Engineering And Technology, Nagpur</h4></div>
+        <div class="card">
+            <div style="font-size: x-large;padding: 20px;letter-spacing: 1.5px;word-spacing: 2px;">
+                I'm Sameer Borkar, a 2nd year student who love programming and a python ethusiast. I am currently available for work and collaboration.
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr;">
+                <div class="social" style="letter-spacing: 1px;">Connect On</div>
+                <!-- <div class="social"><svg height="32" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg> <a href="github.com/sam-79">Github</a></div> -->
+                <div class="social"><a class="bi-github" href="https://www.github.com/sam-79" target="_blank"> Github</a></div>
+                <div class="social"><a class="bi-linkedin" href="https://www.linkedin.com/in/sameer-borkar-aa893b121" target="_blank"> Linkedin</a></div>
+                <div class="social"><a class="bi-twitter" href="https://twitter.com/sameerborkar7" target="_blank"> Twitter</a></div>
+                <div class="social"><a class="bi-google" href="mailto:sameerborkar79@gmail.com" target="_blank"> Gmail</a></div>
+                <div class="social"><a class="bi-instagram" href="https://instagram.com/sameerborkar25" target="_blank"> Instagram</a></div>
+                <!-- <div class="social"><a class="bi-codechef" href="#" >CodeChef</a></div> -->
+            </div>
+        </div>
+
+
+
+    </section>
+
+    <footer class="foot">
+        <p>
+            This site is purely develop for practice purpose. <br>
+            For any issue contact me. <br>
+            Love ❤ From Sameer
+
+        </p>
+    </footer>
+    
+</body>
+</html>
