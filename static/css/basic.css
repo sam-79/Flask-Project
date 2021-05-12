@@ -29,13 +29,13 @@ header>h1{
 
 nav{
     background-color: #ffc6fb;
-    padding: 15px;
+    padding: 10px;
     
 }
 nav>a{
     padding: 1%;
     color: rgb(46, 13, 235);
-    font-size: 2vh;
+    font-size: 100%;
 }
 footer{
     position: relative;

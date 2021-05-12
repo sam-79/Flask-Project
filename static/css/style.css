@@ -89,7 +89,7 @@ select, option{
 .Frow>input[type="button"]{
     
     display: block;
-    width: 30%;
+    width: 80%;
     align-self: center;
     background-color: rgb(9, 228, 228);
     border-radius: 50px;

@@ -3,7 +3,7 @@
 <head>
     <meta name="robots" content="index, follow">
     <meta name="googlebot" content="index, follow">
-    <meta name="description" content="Online tools for Youtube, Instagram, Songs, PDF files for free. Download Instagram Posts">
+    <meta name="description" content="Online tools for Youtube, Instagram, Songs, PDF files for free. Download Instagram profile pictures">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
             justify-content: center;
         }
     </style>
-    <title>Instagram Downloader:{{Sname}}</title>
+    <title>Instagram Profile Downloader:{{Sname}}</title>
 </head>
 
 <body>
@@ -36,15 +36,15 @@
 
     <section class="main-box">
         <div class="Form" id="instaForm">
-            <h1>Instagram Downloader</h1>
+            <h1>Instagram Profile Picture Downloader</h1>
 
             <div class="Frow">
-                <label for="">Enter Instagram Post Link</label>
-                <input type="text" name="postLink" id="postLink">
+                <label for="">Enter Instagram Profile Link</label>
+                <input type="text" name="proLink" id="proLink">
             </div>
             
             <div class="Frow">
-                <input type="button" name="submit" id="submit" value="Get Posts" onclick="callServer();">
+                <input type="button" name="submit" id="submit" value="Get Profile" onclick="callServer();">
             </div>
 
         </div>
@@ -59,9 +59,9 @@
         <!-- Instagram Result -->
     </section>
 
-    <a href="instaProfileDownloader.html" target="_blank">
+    <a href="instaDownloader.html" target="_blank">
         <div class="Frow">
-            <input type="button" name="ProPic" id="ProPic" value="Profile Picture Downloader">
+            <input type="button" value="Instagram Post Downloader">
         </div>
     </a>
     
@@ -94,22 +94,18 @@ function showResult(data){
         //document.querySelector('#username').innerHTML = `<h2>${data.Username}</h2>`;
         // document.querySelector('#thumb').src = data.thumbnail ;
         document.getElementById('loading').textContent = `Username: ${data.Username}`;
-        for (let i of data.posts){
-
-            var node = document.createElement("div");
-            node.className = 'res_row';
-
-            node.innerHTML = `<a href=${i} target="_blank"><h3>Download</h3></a>`;
-
-            document.getElementById("instaResult").appendChild(node);
-        }
+        var node = document.createElement("div");
+        node.className = 'res_row';
+        node.innerHTML = `<a href=${data.link} target="_blank"><h3>Download</h3></a>`;
+        document.getElementById("instaResult").appendChild(node);
+        
     }
 
 
 
     function callServer(){
 
-        var pLink = document.getElementById("postLink").value ;
+        var pLink = document.getElementById("proLink").value ;
 
         xhr = new XMLHttpRequest();
 
@@ -136,7 +132,7 @@ function showResult(data){
                 document.getElementById('instaResult').style.display= 'none';
             }
         }
-        xhr.open('POST','insta-post-result',true);
+        xhr.open('POST','insta-profile-result',true);
         xhr.send(pLink);
     }
 
