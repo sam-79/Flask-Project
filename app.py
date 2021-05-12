@@ -3,7 +3,7 @@
 from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
 import pafy, requests
-from instaloader import Instaloader, Post
+from instaloader import Instaloader, Post, Profile
 from currencies import allcurrencies
 from database import DataBase
 from decouple import config
@@ -15,6 +15,14 @@ app = Flask(__name__)
 app.debug = False
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+#Create instance of Instaloader
+L = Instaloader()
+try:
+    L.login(config('insta_username',default=os.getenv('insta_username')),config('insta_password',default=os.getenv('insta_password')))
+except:
+    L.load_session_from_file(config('insta_username',default=os.getenv('insta_username')))
+
 
 # Home Page
 @app.route('/')
@@ -106,16 +114,12 @@ def Ydownloader():
 def instadownloaderForm():
     return render_template("instaDownload.html",Sname=Sname)
 
-# Instagram Result Request
-@app.route('/instaresult', methods=['POST'])
-def instadownloader(login=True, username = config('insta_username',default=os.getenv('insta_username')),password=config('insta_password',default=os.getenv('insta_password'))):
+# Instagram Post Request
+@app.route('/insta-post-result', methods=['POST'])
+def instaPostDownloader():
     
     shortcode = (request.data.decode().split(sep='/'))[4]
-    #Create instance of Instaloader
-    L = Instaloader()
-    L.login(username,password)
-
-
+    
     try:
         #Post instances
         post = Post.from_shortcode(L.context, shortcode)
@@ -135,6 +139,28 @@ def instadownloader(login=True, username = config('insta_username',default=os.ge
                 posts.append(post.url)
         
         return jsonify({'Username' : post.owner_username , 'posts' : posts})
+
+    except Exception as exp:
+        return jsonify({'Error': f'{exp}'})
+
+#Instagram Profile Pic
+@app.route('/instaProfileDownloader.html')
+def instaProfileDownloaderForm():
+    return render_template("instaProfileDownload.html",Sname=Sname)
+
+#Instagram Profile Pic Request
+@app.route('/insta-profile-result', methods=['POST'])
+def instaProfileDownloader():
+    
+    username = (request.data.decode().split(sep='/'))[3]
+    
+    try:
+        #Post instances
+        profile = Profile.from_username(L.context, username)
+        #result list
+        posts = []
+        
+        return jsonify({'Username' : username , 'link' : profile.profile_pic_url})
 
     except Exception as exp:
         return jsonify({'Error': f'{exp}'})
