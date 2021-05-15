@@ -5,9 +5,6 @@
    justify-content: center;
    align-items: center;
    margin: 3%;
-   /* background-image:url("https://th.bing.com/th/id/OIP.aF4Y_4FHQnB5oUzifZhGiAHaEK?pid=ImgDet&rs=1");
-   background-repeat: no-repeat;
-   background-size: cover; */
    background-color: cornsilk;
    flex-direction: column;
 }
@@ -52,19 +49,19 @@
 
 .Frow>label{
     color: rgb(130, 84, 0);
-    width: 30%;
+    width: inherit;
     padding: 10px;
     border-radius: 5px;
 }
 .Frow>input{
-    width: 65%;
+    width: inherit;
     padding: 10px;
     border-radius: 5px;
     font-size: 100%;
     border: 2px solid rgb(231, 6, 6);
 }
 select, option{
-    width: 65%;
+    width: inherit;
     padding: 10px;
     border-radius: 5px;
     font-size: 100%;
@@ -73,7 +70,7 @@ select, option{
 .Frow>input[type="Submit"]{
     
     display: block;
-    width: 30%;
+    width: 100%;
     align-self: center;
     background-color: rgb(9, 228, 228);
     border-radius: 50px;
@@ -89,13 +86,13 @@ select, option{
 .Frow>input[type="button"]{
     
     display: block;
-    width: 80%;
+    width: 100%;
     align-self: center;
     background-color: rgb(9, 228, 228);
     border-radius: 50px;
     border: 2px solid rgb(5, 78, 114);
     transition: 0.5s;
-    margin: 3%;
+    margin: 3% 0% 3% 0%;
     cursor: pointer ;
     
 }
@@ -107,12 +104,15 @@ select, option{
     transition: .5s;
 }
 
+.Frow>input[type="file"]{
+    font-size: inherit;
+}
+
 .ytresult{
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 2%;
-    /* background-image:url("https://th.bing.com/th/id/OIP.aF4Y_4FHQnB5oUzifZhGiAHaEK?pid=ImgDet&rs=1"); */
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -132,6 +132,14 @@ select, option{
     .grid{
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr 1fr;
+    }
+
+    .Frow>label, .Frow>input[type="file"], .Frow>input[type="text"], .Frow>input[type="number"]{
+        flex-direction: column;
+        width: inherit;
+    }
+    select, option{
+        width: inherit;
     }
 }
 

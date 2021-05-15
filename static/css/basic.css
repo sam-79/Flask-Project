@@ -11,7 +11,7 @@ a{
 }
 a:hover{
     color: tomato;
-    transition: 0.5s;
+    transition: 0.5ms;
     
 }
 header {
