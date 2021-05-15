@@ -1,20 +1,19 @@
 
 # server.py file for heroku web hosting
 from flask import Flask, render_template, request, jsonify
-from werkzeug.utils import secure_filename
-import pafy, requests
+from flask.helpers import send_file
+import pafy, requests, io, os
 from instaloader import Instaloader, Post, Profile
 from currencies import allcurrencies
 from database import DataBase
 from decouple import config
-import os
+from img2pdf import imagetopdf
 
 Sname = 'Online Tools' #Header name of site
-UPLOAD_FOLDER = '/temp'
 app = Flask(__name__)
 app.debug = False
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['UPLOAD_EXTENSIONS']= ['jpg', 'png', 'webp', 'jpeg']
 
 #Create instance of Instaloader
 L = Instaloader()
@@ -179,6 +178,41 @@ def ccresult():
         return jsonify(data['quotes'])
     except Exception as exp:
         return jsonify({'Error': f'{exp}'})
+
+
+#image2pdf
+@app.route('/imagetopdf.html')
+def img2pdf():
+    return render_template('img2pdf.html')
+
+@app.route('/pdf-output.html',methods=['POST'])
+def img2pdfoutput():
+    
+    imgBytesIO=[]
+
+    for i in request.files.getlist('files'):
+        if i.filename != '' :
+            file_ext = (i.filename).split(sep='.')[-1]
+            
+            if file_ext not in app.config['UPLOAD_EXTENSIONS']:
+                return bad_request(0)
+            
+            in_memory_file = io.BytesIO()
+            i.save(in_memory_file)
+            imgBytesIO.append(in_memory_file)
+    
+    #here in x we get bytes data of generated PDF file
+    x=imagetopdf(imgBytesIO)
+    
+    if(x!="Error"):
+        #here in send_file first parameter in filename or fp, so we are passing fp
+        #as_attachment = True -> File directly downloads
+        return send_file(io.BytesIO(x), mimetype='application/pdf', attachment_filename='output.pdf',as_attachment=False)
+    else:
+        print(x)
+        return internal_server_error(0)
+
+
 
 # Error handlings
 @app.errorhandler(400)
