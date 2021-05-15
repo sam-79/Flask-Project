@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/basic.css')}}" media="all"/>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/style.css')}}" media="all"/>
+    
+    <title>Image to PDF</title>
+
+    <style>
+        input#files::file-selector-button{
+            display: block;
+            width: 100%;
+            height: 50px;
+            align-self: center;
+            background-color: rgb(9, 228, 228);
+            border-radius: 50px;
+            border: 2px solid rgb(5, 78, 114);
+            transition: 0.5s;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>
+            {{Sname}}
+        </h1>
+        <nav class="navi">
+            <a href="/">Home</a>
+            <a href="#">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">LogIn</a>
+        </nav>
+    </header>
+
+    <section class="main-box">
+        <form action="/pdf-output.html" method="POST" enctype="multipart/form-data" class="Form">
+            <h1>Image to PDF</h1>
+
+            <div class="Frow" style="flex-direction: column;">
+                <label for="">Upload your Images</label>
+                <input type="file" name="files" id="files" accept=".jpg, .jpeg, .webp, .png" multiple style="border: none;">
+            </div>
+            
+            <div class="Frow">
+                <input type="Submit" name="submit" id="submit" value="Convert" onclick="load();">
+            </div>
+
+        </form>
+    </section>
+
+    <div id='loading' class="Frow" style="font-size: xx-large;">
+        <!-- LOADING -->
+    </div>
+
+    <footer class="foot">
+        <p>
+            Site is under development state
+        </p>
+    </footer>
+    
+</body>
+<script>
+
+    function load(){
+        document.getElementById('loading').style.display = 'flex';
+        document.getElementById('loading').textContent = 'LOADING';
+    }
+
+</script>
+</html>
