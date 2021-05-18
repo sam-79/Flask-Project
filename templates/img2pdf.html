@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="description" content="Online tools for images to PDF Conversion for free">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/basic.css')}}" media="all"/>
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/style.css')}}" media="all"/>
     
-    <title>Image to PDF</title>
+    <title>Image to PDF: {{Sname}}</title>
 
     <style>
         input#files::file-selector-button{
@@ -36,21 +39,21 @@
             <a href="/">Home</a>
             <a href="#">About</a>
             <a href="contact.html">Contact</a>
-            <a href="login.html">LogIn</a>
+            <!-- <a href="login.html">LogIn</a> -->
         </nav>
     </header>
 
     <section class="main-box">
-        <form action="/pdf-output.html" method="POST" enctype="multipart/form-data" class="Form">
+        <form action="/imgtoPDFoutput.pdf" method="POST" enctype="multipart/form-data" class="Form">
             <h1>Image to PDF</h1>
 
             <div class="Frow" style="flex-direction: column;">
                 <label for="">Upload your Images</label>
-                <input type="file" name="files" id="files" accept=".jpg, .jpeg, .webp, .png" multiple style="border: none;">
+                <input type="file" name="files" id="files" accept=".jpg, .jpeg, .webp, .png" multiple style="border: none;" required>
             </div>
             
             <div class="Frow">
-                <input type="Submit" name="submit" id="submit" value="Convert" onclick="load();">
+                <input type="Submit" name="submit" id="submit" value="Convert to PDF" onclick="load();">
             </div>
 
         </form>
