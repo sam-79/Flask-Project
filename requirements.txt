@@ -13,6 +13,7 @@ MarkupSafe==1.1.1
 pafy==0.5.5
 Pillow==8.1.2
 pycodestyle==2.7.0
+PyPDF2==1.26.0
 python-decouple==3.4
 requests==2.25.1
 soupsieve==2.2.1
