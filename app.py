@@ -7,13 +7,13 @@ from instaloader import Instaloader, Post, Profile
 from currencies import allcurrencies
 from database import DataBase
 from decouple import config
-from img2pdf import imagetopdf
+from PDFutility import *
 
 Sname = 'Online Tools' #Header name of site
 app = Flask(__name__)
 app.debug = False
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
-app.config['UPLOAD_EXTENSIONS']= ['jpg', 'png', 'webp', 'jpeg']
+app.config['UPLOAD_EXTENSIONS']= ['jpg', 'png', 'webp', 'jpeg', "pdf"]
 
 #Create instance of Instaloader
 L = Instaloader()
@@ -181,12 +181,12 @@ def ccresult():
 
 
 #image2pdf
-@app.route('/imagetopdf.html')
+@app.route('/image-to-pdf.html')
 def img2pdf():
-    return render_template('img2pdf.html')
+    return render_template('img2pdf.html',Sname=Sname)
 
-@app.route('/pdf-output.html',methods=['POST'])
-def img2pdfoutput():
+@app.route('/imgtoPDFoutput.pdf',methods=['POST'])
+def imgtoPDFoutput():
     
     imgBytesIO=[]
 
@@ -202,15 +202,108 @@ def img2pdfoutput():
             imgBytesIO.append(in_memory_file)
     
     #here in x we get bytes data of generated PDF file
-    x=imagetopdf(imgBytesIO)
+    x=imagetoPDF(imgBytesIO)
     
     if(x!="Error"):
         #here in send_file first parameter in filename or fp, so we are passing fp
         #as_attachment = True -> File directly downloads
         return send_file(io.BytesIO(x), mimetype='application/pdf', attachment_filename='output.pdf',as_attachment=False)
     else:
-        print(x)
-        return internal_server_error(0)
+        #return f" <h1> {x['error']} </h1>"
+        return bad_request(x['error'])
+
+#Encrypt PDF
+@app.route('/encrypt-pdf.html')
+def encryptpdf():
+    return render_template('encryptPDF.html', Sname=Sname)
+
+@app.route('/encryptedPDFoutput.pdf',methods=['POST'])
+def encryptedPDFoutput():
+
+    pdfile = request.files['files']
+    password = request.form['password']
+
+    if pdfile.filename != '' :
+        file_ext = (pdfile.filename).split(sep='.')[-1]
+        if file_ext not in app.config['UPLOAD_EXTENSIONS']:
+            return bad_request(0)
+            
+        in_memory_file = io.BytesIO()
+        pdfile.save(in_memory_file)
+    
+    #here in x we get bytes data of generated PDF file
+    x = encryptPDF(in_memory_file, password)
+    
+    if(type(x)!=dict):
+        #here in send_file first parameter in filename or fp, so we are passing fp
+        #as_attachment = True -> File directly downloads
+        return send_file(io.BytesIO(x), mimetype='application/pdf', attachment_filename='output.pdf',as_attachment=False)
+    else:
+        #return f" <h1> {x['error']} </h1>"
+        return bad_request(x['error'])
+
+#Decrypt PDF
+@app.route('/decrypt-pdf.html')
+def decryptpdf():
+    return render_template('decryptPDF.html', Sname=Sname)
+
+@app.route('/decryptedPDFoutput.pdf',methods=['POST'])
+def decryptedPDFoutput():
+
+    pdfile = request.files['files']
+    password = request.form['password']
+
+    if pdfile.filename != '' :
+        file_ext = (pdfile.filename).split(sep='.')[-1]
+        if file_ext not in app.config['UPLOAD_EXTENSIONS']:
+            return bad_request(0)
+            
+        in_memory_file = io.BytesIO()
+        pdfile.save(in_memory_file)
+    
+    #here in x we get bytes data of generated PDF file
+    x = decryptPDF(in_memory_file, password)
+    
+    if(type(x)!=dict):
+        #here in send_file first parameter in filename or fp, so we are passing fp
+        #as_attachment = True -> File directly downloads
+        return send_file(io.BytesIO(x), mimetype='application/pdf', attachment_filename='output.pdf',as_attachment=False)
+    else:
+        #return f" <h1> {x['error']} </h1>"
+        return bad_request(x['error'])
+
+
+#Merge PDF
+@app.route('/merge-pdf.html')
+def mergepdf():
+    return render_template('mergePDF.html', Sname=Sname)
+
+@app.route('/mergedPDFoutput.pdf',methods=['POST'])
+def mergedPDFoutput():
+
+    pdfBytesIO=[]
+
+    for i in request.files.getlist('files'):
+        if i.filename != '' :
+            file_ext = (i.filename).split(sep='.')[-1]
+            
+            if file_ext not in app.config['UPLOAD_EXTENSIONS']:
+                return bad_request(0)
+            
+            in_memory_file = io.BytesIO()
+            i.save(in_memory_file)
+            pdfBytesIO.append(in_memory_file)
+    
+    #here in x we get bytes data of generated PDF file
+    x=mergePDF(pdfBytesIO)
+    
+    if(type(x)!=dict):
+        #here in send_file first parameter in filename or fp, so we are passing fp
+        #as_attachment = True -> File directly downloads
+        return send_file(io.BytesIO(x), mimetype='application/pdf', attachment_filename='output.pdf',as_attachment=False)
+    else:
+        #return f" <h1> {x['error']} </h1>"
+        return bad_request(x['error'])
 
 
 
