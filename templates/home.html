@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="utf-8">
     <meta name="robots" content="index, follow">
     <meta name="googlebot" content="index, follow">
     <meta name="description" content="Online tools for Youtube, Instagram, Songs, PDF files for free">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffc6fb">
+
+    <link rel="manifest" href="{{url_for('static',filename='manifest.webmanifest')}}" Content-Type= "application/manifest+json">
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@600&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/favicon.ico" type="image/x-icon">
+
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/homeStyle.css')}}" media="all"/>
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/basic.css')}}" media="all"/>
+    
+    <script src="{{url_for('static',filename = 'js/sw.js')}}"></script>
     <title>Home: {{Sname}}</title>
     <style>
         .tool-box-div{

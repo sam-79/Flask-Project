@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@600&display=swap" rel="stylesheet">
+
+    <title>Offline: {{Sname}}</title>
+
+    <style>
+        *{
+            font-family: 'El Messiri', sans-serif;
+        }
+        body{
+            margin: 0;
+        }
+        a{
+            text-decoration: none;
+            transition: 0.5s;
+
+        }
+        a:hover{
+            color: tomato;
+            transition: 0.5ms;
+            
+        }
+        header {
+            height:20%;
+            background-color: #f11bf1;
+            border: 2px groove rgb(67, 7, 116);
+            
+        }
+        header>h1{
+            text-align: center;
+            color: #000;
+            font-size: 5vh;
+            
+        }
+        footer{
+            position: relative;
+            bottom: 20px ;
+            text-align: center;
+            background-color: cyan;
+            padding: 2px;
+            margin-top: 50px ;
+            font-size: 2vh;
+            word-spacing: 3px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>
+            {{Sname}}
+        </h1>
+        
+    </header>
+
+    <section style="display: flex; justify-content: center; align-content: center;flex-direction: column; background-color: aqua;margin: 5%;">
+        <h1 style="display: flex; justify-content: center; align-content: center;">
+            No Internet Avilable
+            You are Offline
+        </h1>
+        
+    </section>
+
+    <footer class="foot">
+        <p>
+            Site is under development state.
+        </p>
+    </footer>
+    
+</body>
+</html>

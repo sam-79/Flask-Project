@@ -323,5 +323,33 @@ def internal_server_error(e):
     return render_template('Errors/internal_server_error.html',Sname=Sname)
 
 
+
+#For PWA
+#ServiceWorker
+@app.route("/service-worker.js")
+def sw():
+    return app.send_static_file("js/sw.js")
+
+
+#Manifest
+@app.route("/static/manifest.json")
+def manifest():
+    return send_file("static/manifest.webmanifest")
+
+
+#offine
+@app.route("/offline")
+def offline():
+    return send_file("templates/offline.html")
+
+
+#favicon
+@app.route("/favicon.ico")
+def favicon():
+    return send_file("static/images/icons/favicon.ico", mimetype="image/x-icon")
+
+
+
+
 if(__name__ == '__main__'):
     app.run()
