@@ -15,13 +15,14 @@ app.debug = False
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
 app.config['UPLOAD_EXTENSIONS']= ['jpg', 'png', 'webp', 'jpeg', "pdf"]
 
+"""
 #Create instance of Instaloader
 L = Instaloader()
 try:
     L.login(config('insta_username',default=os.getenv('insta_username')),config('insta_password',default=os.getenv('insta_password')))
 except:
     L.load_session_from_file(config('insta_username',default=os.getenv('insta_username')))
-
+"""
 
 # Home Page
 @app.route('/')
